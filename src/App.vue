@@ -1,19 +1,39 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import CartModal from "./components/CartModal.vue";
-import ProductsContainer from "./components/ProductsContainer.vue";
-import { useCartStore } from "./stores/CartStore";
+import { ref } from 'vue';
+import CartItem from './components/CartItem.vue';
+import CartModal from './components/CartModal.vue';
+import ProductsContainer from './components/ProductsContainer.vue';
+import { useCartStore } from './stores/CartStore';
 const openModal = ref(false);
 const cartStore = useCartStore();
+const clearCart = () => {
+  openModal.value = false;
+  cartStore.$reset();
+}
 </script>
 
 <template>
   <CartModal :open="openModal" @close="openModal = false">
-    <template #header> <h4>Your Cart</h4></template>
-    <template #body>content</template>
+    <template #header> <h3>Your Cart</h3></template>
+    <template #body>
+      <div v-for="item in cartStore.getItems" :key="item[0].id">
+        <CartItem
+          :name="item[0].name"
+          :count="item.length"
+          :id="item[0].id"
+          :price="item[0].price"
+          @deleteItem="cartStore.deleteItem(item[0])"
+        />
+      </div>
+      <div class="cart-total">
+        Total: ${{ cartStore.total }}
+      </div>
+    </template>
     <template #footer>
-      <button @click="openModal = false">Clear Cart</button>
-      <button @click="openModal = false">Checkout</button>
+      <div class="footer-btns">
+        <button class="button" @click="clearCart">Clear Cart</button>
+        <button class="button" @click="openModal = false">Checkout</button>
+      </div>
     </template>
   </CartModal>
   <header class="header">
@@ -34,6 +54,12 @@ const cartStore = useCartStore();
   justify-content: space-between;
   align-items: center;
 }
+.cart-total {
+  padding: 1rem;
+  text-align: right;
+  padding-right: 3.5rem;
+  border-top: 2px dashed #aaa;
+}
 .header h2 {
   margin: 0.5rem;
 }
@@ -53,5 +79,45 @@ const cartStore = useCartStore();
   height: 15px;
   text-align: center;
   right: 0;
+}
+.footer-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  margin: 0.5rem;
+  background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+  border: 0;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button:not([disabled]):focus {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button:not([disabled]):hover {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 </style>
