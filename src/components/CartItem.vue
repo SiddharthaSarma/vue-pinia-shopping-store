@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ItemCounter from './ItemCounter.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 const props = defineProps({
   name: { type: String },
   count: { type: Number, default: 0 },
@@ -8,12 +8,16 @@ const props = defineProps({
   price: { type: Number, default: 0 },
 });
 const itemCount = ref(props.count);
+const emits = defineEmits(['updateItemCount']);
+watch(itemCount, (newValue) => {
+  emits('updateItemCount', newValue);
+});
 </script>
 <template>
   <div class="cart-items">
     <div class="item-name">{{ name }}</div>
     <ItemCounter v-model="itemCount" />
-    <div class="price">${{ price * count }}</div>
+    <div class="price">${{ (price * count).toFixed(2) }}</div>
     <div class="delete-item" @click="$emit('deleteItem')">
       <img src="../assets/delete-button.svg" width="32" />
     </div>

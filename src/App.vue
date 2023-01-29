@@ -16,19 +16,25 @@ const clearCart = () => {
   <CartModal :open="openModal" @close="openModal = false">
     <template #header> <h3>Your Cart</h3></template>
     <template #body>
-      <div v-for="item in cartStore.getItems" :key="item[0].id">
-        <CartItem
-          :name="item[0].name"
-          :count="item.length"
-          :id="item[0].id"
-          :price="item[0].price"
-          @deleteItem="cartStore.deleteItem(item[0])"
-        />
+      <div v-if="!cartStore.isEmpty">
+        <div v-for="item in cartStore.getItems" :key="item[0].id">
+          <CartItem
+            :name="item[0].name"
+            :count="item.length"
+            :id="item[0].id"
+            :price="item[0].price"
+            @deleteItem="cartStore.deleteItem(item[0])"
+            @updateItemCount="cartStore.addItemToCart(item[0], $event)"
+          />
+        </div>
+        <div class="cart-total">Total: ${{ cartStore.total }}</div>
       </div>
-      <div class="cart-total">Total: ${{ cartStore.total }}</div>
+      <div v-if="cartStore.isEmpty">
+        You're cart is empty, please add some items 😀
+      </div>
     </template>
     <template #footer>
-      <div class="footer-btns">
+      <div class="footer-btns" v-if="!cartStore.isEmpty">
         <button class="button" @click="clearCart">Clear Cart</button>
         <button class="button" @click="openModal = false">Checkout</button>
       </div>
@@ -55,7 +61,7 @@ const clearCart = () => {
 .cart-total {
   padding: 1rem;
   text-align: right;
-  padding-right: 3.5rem;
+  padding-right: 4.5rem;
   border-top: 2px dashed #aaa;
 }
 .header h2 {
