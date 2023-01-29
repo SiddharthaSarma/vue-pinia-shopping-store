@@ -4,7 +4,7 @@ defineProps({
   modelValue: { type: [Number], default: 0 },
 });
 
-const updateValue = (value: any) => {
+const updateValue = (value: number) => {
   emit('update:modelValue', value);
 };
 </script>
@@ -13,11 +13,11 @@ const updateValue = (value: any) => {
     <div class="operators" @click="updateValue(modelValue - 1)">-</div>
     <div>
       <input
-        type="number"
+        type="text"
         name="count"
         id="itemCountInput"
         :value="modelValue"
-        @input="updateValue"
+        @input="updateValue(parseInt($event.target?.value), 10)"
       />
     </div>
     <div class="operators" @click="updateValue(modelValue + 1)">+</div>

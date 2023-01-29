@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import CartModal from "./components/CartModal.vue";
 import ProductsContainer from "./components/ProductsContainer.vue";
+import { useCartStore } from "./stores/CartStore";
 const openModal = ref(false);
+const cartStore = useCartStore();
 </script>
 
 <template>
@@ -18,7 +20,7 @@ const openModal = ref(false);
     <h2>Pinia Shopping cart</h2>
     <div class="cart-img-container" @click="openModal = true">
       <img src="./assets/cart.svg" alt="cart icon" width="32" />
-      <span class="cart-count">10</span>
+      <span class="cart-count">{{ cartStore.cartCount }}</span>
     </div>
   </header>
   <ProductsContainer />
@@ -41,12 +43,15 @@ const openModal = ref(false);
 }
 .cart-count {
   position: absolute;
-  border: 1px solid orange;
-  background-color: orange;
-  color: white;
+  border: 1px solid rgb(196, 113, 37);
+  background-color: rgb(196, 113, 37);
+  color: #fff;
   padding: 3px;
   border-radius: 50%;
   top: -20px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
   right: 0;
 }
 </style>
