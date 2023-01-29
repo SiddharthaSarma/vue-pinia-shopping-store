@@ -9,6 +9,9 @@ defineProps<{
       <div class="modal-container">
         <div class="modal-header">
           <slot name="header"> default header </slot>
+          <div class="modal-close" @click="$emit('close')">
+            <img src="../assets/close-icon.svg" alt="close icon" width="22" />
+          </div>
         </div>
 
         <div class="modal-body">
@@ -34,6 +37,10 @@ defineProps<{
   display: table;
   transition: opacity 0.3s ease;
 }
+.modal-close {
+  text-align: right;
+  cursor: pointer;
+}
 
 .modal-wrapper {
   display: table-cell;
@@ -50,9 +57,10 @@ defineProps<{
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
-
-.modal-header h3 {
-  margin-top: 0;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #42b983;
 }
 
