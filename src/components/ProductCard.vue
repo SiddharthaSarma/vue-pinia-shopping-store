@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import ItemCounter from "./ItemCounter.vue";
-import AddToCart from "./AddToCart.vue";
+import ItemCounter from './ItemCounter.vue';
+import AddToCart from './AddToCart.vue';
+import { ref } from 'vue';
 const getPath = (name: string) => {
   return new URL(`../assets/${name}`, import.meta.url).href;
 };
@@ -12,14 +13,20 @@ defineProps<{
     price: number;
   };
 }>();
+const count = ref(0);
+const emits = defineEmits(['addToCart']);
+const addToCart = () => {
+  emits('addToCart', count.value);
+  count.value = 0;
+};
 </script>
 <template>
   <div class="product">
     <img :src="getPath(product.image)" width="225" height="200" />
     <h3>{{ product.name }}</h3>
     <span class="price">${{ product.price }}</span>
-    <ItemCounter />
-    <AddToCart />
+    <ItemCounter v-model="count" />
+    <AddToCart @click="addToCart" />
   </div>
 </template>
 <style scoped>

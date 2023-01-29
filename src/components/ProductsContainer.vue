@@ -12,6 +12,7 @@ productStore.fetchProducts();
       v-for="product in productStore.products"
       :product="product"
       :key="product.id"
+      @addToCart="cartStore.addItemToCart(product, $event)"
     />
   </div>
 </template>

@@ -1,19 +1,26 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-const count = ref(0);
-const emit = defineEmits(["itemChange"]);
-
-watch(count, (newValue) => {
-  emit("itemChange", newValue);
+const emit = defineEmits(['update:modelValue', 'input']);
+defineProps({
+  modelValue: { type: [Number], default: 0 },
 });
+
+const updateValue = (value: any) => {
+  emit('update:modelValue', value);
+};
 </script>
 <template>
   <div class="item-counter">
-    <div class="operators" @click="count--">-</div>
+    <div class="operators" @click="updateValue(modelValue - 1)">-</div>
     <div>
-      <input type="text" name="count" id="itemCountInput" v-model="count" />
+      <input
+        type="number"
+        name="count"
+        id="itemCountInput"
+        :value="modelValue"
+        @input="updateValue"
+      />
     </div>
-    <div class="operators" @click="count++">+</div>
+    <div class="operators" @click="updateValue(modelValue + 1)">+</div>
   </div>
 </template>
 <style scoped>
