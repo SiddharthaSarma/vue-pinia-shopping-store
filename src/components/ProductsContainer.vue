@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useProductsStore } from "@/stores/ProductsStore";
-import { useCartStore } from "@/stores/CartStore";
-import ProductCard from "./ProductCard.vue";
+import { useProductsStore } from '@/stores/ProductsStore';
+import { useCartStore } from '@/stores/CartStore';
+import ProductCard from './ProductCard.vue';
 const productStore = useProductsStore();
 const cartStore = useCartStore();
 productStore.fetchProducts();

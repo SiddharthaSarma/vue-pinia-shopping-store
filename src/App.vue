@@ -9,7 +9,7 @@ const cartStore = useCartStore();
 const clearCart = () => {
   openModal.value = false;
   cartStore.$reset();
-}
+};
 </script>
 
 <template>
@@ -25,9 +25,7 @@ const clearCart = () => {
           @deleteItem="cartStore.deleteItem(item[0])"
         />
       </div>
-      <div class="cart-total">
-        Total: ${{ cartStore.total }}
-      </div>
+      <div class="cart-total">Total: ${{ cartStore.total }}</div>
     </template>
     <template #footer>
       <div class="footer-btns">

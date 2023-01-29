@@ -13,7 +13,7 @@ export const useCartStore = defineStore('Cart', {
   getters: {
     cartCount: (state) => state.cart.length,
     getItems: (state) => groupBy(state.cart, 'id'),
-    total: (state) => state.cart.reduce((a, item) => a + item.price, 0)
+    total: (state) => state.cart.reduce((a, item) => a + item.price, 0),
   },
   actions: {
     addItemToCart(item: Product, count: number) {
