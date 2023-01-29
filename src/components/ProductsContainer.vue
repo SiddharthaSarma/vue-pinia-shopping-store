@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import products from "../data/products.json";
+import { useProductsStore } from "@/stores/ProductsStore";
+import { useCartStore } from "@/stores/CartStore";
 import ProductCard from "./ProductCard.vue";
+const productStore = useProductsStore();
+const cartStore = useCartStore();
+productStore.fetchProducts();
 </script>
 <template>
   <div class="products-container">
     <ProductCard
-      v-for="product in products"
+      v-for="product in productStore.products"
       :product="product"
       :key="product.id"
     />
