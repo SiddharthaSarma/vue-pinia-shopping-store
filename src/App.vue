@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import CartItem from './components/CartItem.vue';
-import CartModal from './components/CartModal.vue';
-import ProductsContainer from './components/ProductsContainer.vue';
-import { useCartStore } from './stores/CartStore';
+import CartItem from '@/components/CartItem.vue';
+import CartModal from '@/components/CartModal.vue';
+import ProductsContainer from '@/components/ProductsContainer.vue';
+import { useCartStore } from '@/stores/CartStore';
 const openModal = ref(false);
 const cartStore = useCartStore();
 const clearCart = () => {
