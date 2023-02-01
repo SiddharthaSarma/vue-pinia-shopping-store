@@ -25,15 +25,23 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      // login(email: string, password: string): Chainable<void>
+      // drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+      // dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+      // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
+      getByTestId(selector: string): Chainable<JQuery<HTMLElement>>;
+      getByTestClass(selector: string): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+Cypress.Commands.add('getByTestId', (selector, ...args) => {
+  return cy.get(`[data-test-id=${selector}]`, ...args);
+});
 
+Cypress.Commands.add('getByTestClass', (selector, ...args) => {
+  return cy.get(`[data-test-class=${selector}]`, ...args);
+});
 export {};

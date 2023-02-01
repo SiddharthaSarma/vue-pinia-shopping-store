@@ -9,6 +9,7 @@ productStore.fetchProducts();
 <template>
   <div class="products-container">
     <ProductCard
+      data-test-class="product-container"
       v-for="product in productStore.products"
       :product="product"
       :key="product.id"

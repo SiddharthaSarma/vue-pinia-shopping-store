@@ -41,7 +41,7 @@ const clearCart = () => {
     </template>
   </CartModal>
   <header class="header">
-    <h2>Pinia Shopping cart</h2>
+    <h2 data-test-id="heading">Pinia Shopping cart</h2>
     <div class="cart-img-container" @click="openModal = true">
       <img src="./assets/cart.svg" alt="cart icon" width="32" />
       <span class="cart-count">{{ cartStore.cartCount }}</span>

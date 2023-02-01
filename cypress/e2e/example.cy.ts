@@ -1,8 +1,8 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
-  it('visits the app root url', () => {
+describe('Pinia store', () => {
+  it('initial state', () => {
     cy.visit('/');
-    cy.contains('h1', 'You did it!');
+    cy.getByTestId('heading').should('exist').should('have.text', 'Pinia Shopping cart');
   });
 });
