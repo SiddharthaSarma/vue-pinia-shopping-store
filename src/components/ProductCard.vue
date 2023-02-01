@@ -26,7 +26,7 @@ const addToCart = () => {
     <h3>{{ product.name }}</h3>
     <span class="price" data-test-class="product-price">${{ product.price }}</span>
     <ItemCounter v-model="count" />
-    <AddToCart @click="addToCart" />
+    <AddToCart data-test-id="addToCartBtn" @click="addToCart" />
   </div>
 </template>
 <style scoped>

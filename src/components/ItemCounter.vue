@@ -10,18 +10,33 @@ const updateValue = (value: number) => {
 </script>
 <template>
   <div class="item-counter">
-    <div class="operators" @click="updateValue(modelValue - 1)">-</div>
+    <div
+      class="operators"
+      @click="updateValue(modelValue - 1)"
+      data-test-id="minusOperator"
+    >
+      -
+    </div>
     <div>
       <input
         type="text"
         name="count"
         id="itemCountInput"
         data-test-class="item-count-input"
+        data-test-id="itemCountInput"
         :value="modelValue"
-        @input="updateValue(parseInt(($event.target as HTMLInputElement).value, 10))"
+        @input="
+          updateValue(parseInt(($event.target as HTMLInputElement).value, 10))
+        "
       />
     </div>
-    <div class="operators" @click="updateValue(modelValue + 1)">+</div>
+    <div
+      class="operators"
+      @click="updateValue(modelValue + 1)"
+      data-test-id="plusOperator"
+    >
+      +
+    </div>
   </div>
 </template>
 <style scoped>
