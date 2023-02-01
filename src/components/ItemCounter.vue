@@ -16,8 +16,9 @@ const updateValue = (value: number) => {
         type="text"
         name="count"
         id="itemCountInput"
+        data-test-class="item-count-input"
         :value="modelValue"
-        @input="updateValue(parseInt($event.target?.value), 10)"
+        @input="updateValue(parseInt(($event.target as HTMLInputElement).value, 10))"
       />
     </div>
     <div class="operators" @click="updateValue(modelValue + 1)">+</div>

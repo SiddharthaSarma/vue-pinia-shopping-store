@@ -24,7 +24,7 @@ const addToCart = () => {
   <div class="product">
     <img :src="getPath(product.image)" width="225" height="200" />
     <h3>{{ product.name }}</h3>
-    <span class="price">${{ product.price }}</span>
+    <span class="price" data-test-class="product-price">${{ product.price }}</span>
     <ItemCounter v-model="count" />
     <AddToCart @click="addToCart" />
   </div>

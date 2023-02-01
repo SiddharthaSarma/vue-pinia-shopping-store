@@ -44,7 +44,7 @@ const clearCart = () => {
     <h2 data-test-id="heading">Pinia Shopping cart</h2>
     <div class="cart-img-container" @click="openModal = true">
       <img src="./assets/cart.svg" alt="cart icon" width="32" />
-      <span class="cart-count">{{ cartStore.cartCount }}</span>
+      <span class="cart-count" data-test-id="cartCount">{{ cartStore.cartCount }}</span>
     </div>
   </header>
   <ProductsContainer />
