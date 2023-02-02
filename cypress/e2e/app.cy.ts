@@ -5,6 +5,7 @@ describe('Pinia store', () => {
     cy.visit('/');
     cy.getByTestClass('product-container').as('productContainerList');
   });
+
   it('initial state', () => {
     cy.getByTestId('heading')
       .should('exist')
@@ -43,5 +44,13 @@ describe('Pinia store', () => {
       .then(($el) => Cypress._.map($el, 'value'))
       .should('deep.equal', ['0', '0', '0', '0', '0', '0']);
     cy.getByTestId('cartCount').should('have.text', '12');
+  });
+
+  it('should check the dialog contains right data', () => {
+    cy.get('@productContainerList').each(($el) => {
+      cy.wrap($el.find('[data-test-id=plusOperator]')).click().click();
+      cy.wrap($el.find('[data-test-id=addToCartBtn]')).click();
+    });
+    cy.getByTestId('cartCount').click();
   });
 });
