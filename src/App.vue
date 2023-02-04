@@ -10,10 +10,13 @@ const clearCart = () => {
   openModal.value = false;
   cartStore.$reset();
 };
+const test = () => {
+  console.log('test');
+}
 </script>
 
 <template>
-  <CartModal :open="openModal" @close="openModal = false">
+  <CartModal :open="openModal" @close="openModal = false" v-click-outside="test">
     <template #header> <h3>Your Cart</h3></template>
     <template #body>
       <div v-if="!cartStore.isEmpty">
