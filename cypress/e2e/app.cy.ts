@@ -47,10 +47,7 @@ describe('Pinia store', () => {
   });
 
   it('should check the dialog contains right data', () => {
-    cy.get('@productContainerList').each(($el) => {
-      cy.wrap($el.find('[data-test-id=plusOperator]')).click().click();
-      cy.wrap($el.find('[data-test-id=addToCartBtn]')).click();
-    });
+    cy.addItemsToCart(); 
     cy.getByTestId('cartCount').click();
   });
 });

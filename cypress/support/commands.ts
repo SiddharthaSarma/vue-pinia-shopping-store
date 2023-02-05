@@ -34,6 +34,7 @@ declare global {
       // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
       getByTestId(selector: string): Chainable<JQuery<HTMLElement>>;
       getByTestClass(selector: string): Chainable<JQuery<HTMLElement>>;
+      addItemsToCart(): void;
     }
   }
 }
@@ -43,5 +44,12 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
 
 Cypress.Commands.add('getByTestClass', (selector, ...args) => {
   return cy.get(`[data-test-class=${selector}]`, ...args);
+});
+
+Cypress.Commands.add('addItemsToCart', () => {
+  cy.get('@productContainerList').each(($el) => {
+    cy.wrap($el.find('[data-test-id=plusOperator]')).click().click();
+    cy.wrap($el.find('[data-test-id=addToCartBtn]')).click();
+  });
 });
 export {};
